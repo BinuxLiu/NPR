@@ -5,8 +5,8 @@ from PIL import Image
 
 class Format_Datasets():
 
-    def __init__(self, args):
-        self.datasets_folder = args.datasets_folder
+    def __init__(self, datasets_folder):
+        self.datasets_folder = datasets_folder
         self.raw_dataset_paths = os.path.join(self.datasets_folder, "raw")
         self.nightstreet_path = os.path.join(self.datasets_folder, "nightstreet")
         self.trainA_path = os.path.join(self.nightstreet_path, "trainA")
@@ -68,4 +68,11 @@ class Format_Datasets():
         TODO: Build the NightScape dataset which is larger than the NightStreet dataset
         """
         pass
+
+
+if __name__ == "__main__":
+    
+    formater = Format_Datasets("./datsets")
+    formater.tokyo247_to_nightstreet()
+    formater.aachenDN_to_nightstreet()
 
