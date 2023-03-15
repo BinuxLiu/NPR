@@ -1,0 +1,3 @@
+[submodule "third_party/negcut"]
+	path = third_party/negcut
+	url = https://github.com/WeilunWang/NEGCUT.git
