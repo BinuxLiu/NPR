@@ -20,6 +20,8 @@ This is the official implementation of the ICCV 2023 paper "NPR: Nocturnal Place
         ```
         ```shell
         # terminal_2
+        # Please modify the line 157 in third_party/negcut/data/base_dataset.py
+        # if shortside >= target_width: -> if shortside <= target_width:
         cd ./third_party/negcut
         python train.py --dataroot ../../datasets/nightstreet --checkpoints_dir ../../checkpoints --name nightstreet --NEGCUT_mode negcut --model negcut --load_size 512 --crop_size 512 --preprocess scale_shortside_and_crop
         ```

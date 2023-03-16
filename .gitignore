@@ -1,3 +1,5 @@
 demo
-datasets*
+datasets_v1
+datasets/nightstreet/*
+datasets/raw/*
 checkpoints*
