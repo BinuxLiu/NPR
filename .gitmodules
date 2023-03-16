@@ -1,0 +1,6 @@
+[submodule "third_party/NEGCUT"]
+	path = third_party/NEGCUT
+	url = https://github.com/BinuxLiu/NEGCUT.git
+[submodule "third_party/CosPlace"]
+	path = third_party/CosPlace
+	url = https://github.com/BinuxLiu/CosPlace.git
