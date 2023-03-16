@@ -72,7 +72,7 @@ class Format_Datasets():
 
 if __name__ == "__main__":
     
-    formater = Format_Datasets("./datsets")
+    formater = Format_Datasets("./datasets")
     formater.tokyo247_to_nightstreet()
     formater.aachenDN_to_nightstreet()
 
