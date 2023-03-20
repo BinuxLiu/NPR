@@ -8,16 +8,16 @@ git clone https://github.com/BinuxLiu/npr.git
 
 ## Reproduce our results
 
-1. Generate NightStreet dataset
+1. Generate NightStreet and VPR datasets
     * First, run the following command:
         ```shell
         # Initialize the folders of datasets
         python format_datasets.py --datasets_folder /path/to/datasets
         ```
-    * Then, you need to download AachenDN, Tokyo247, Pittsburgh, SF-XL-small dataset to the 'datasets/raw' folder.
+    * Then, you need to download AachenDN (v1, v1.1), Tokyo247 (v2, v3, and database), Pittsburgh, SF-XL-small dataset to the 'datasets/raw' folder.
       The download links of above datasets are written in the comments of `format_datasets.py`.
       In datasets/raw/pittsburgh there should be the following folders: 000, 001, 002, 003, 004, 005, 006, queries_real, index. (index is a folder that contains files such as pitts30k_train.mat).
-      Except for the Pittsburgh dataset, none of the other datasets require you to manually decompress them.
+      Except for the Pittsburgh and Tokyo 247 dataset, none of the other datasets require you to manually decompress them.
     * Run the following command:
         ```shell
         python format_datasets.py --datasets_folder /path/to/datasets/ --datasets aachen_tokyo_pitts_sfxl
