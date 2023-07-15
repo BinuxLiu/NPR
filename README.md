@@ -1,6 +1,6 @@
 # NPR: Nocturnal Place Recognition in Street
 
-This is the official implementation of the ICCV 2023 paper "NPR: Nocturnal Place Recognition in Street".
+This is the official implementation of the paper "NPR: Nocturnal Place Recognition in Streets".
 
 ```shell
 git clone https://github.com/BinuxLiu/npr.git
@@ -24,7 +24,7 @@ git clone https://github.com/BinuxLiu/npr.git
         ```
     * If you are using our pre-generated NightStreet dataset, you can skip the above step. You can download the NightStreet dataset directly from here and merge it with the `./datasets/nightstreet` folder after extracting it.
 
-2. Train NEG-CUT on NightStreet dataset
+2. Train NEG-CUT on NightStreet dataset (NightCity)
     * To train NEG-CUT on the NightStreet dataset, run the following command in the terminal:
         ```shell
         # terminal_1
@@ -34,6 +34,7 @@ git clone https://github.com/BinuxLiu/npr.git
         # terminal_2
         cd ./third_party/NEGCUT
         python train.py --dataroot ../../datasets/nightstreet --checkpoints_dir ../../checkpoints --name nightstreet --NEGCUT_mode negcut --model negcut --load_size 512 --crop_size 512 --preprocess scale_shortside_and_crop
+        python train.py --dataroot ../../datasets/nightcity --checkpoints_dir ../../checkpoints --name nightcity --NEGCUT_mode negcut --model negcut --load_size 512 --crop_size 512 --preprocess scale_shortside_and_crop
         ```
     * If you are using our pre-trained NEG-CUT model, you can skip this step.
 
