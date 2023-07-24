@@ -65,7 +65,7 @@ class Format_Datasets():
         self.testB_path = os.path.join(self.nightstreet_path, "testB")
 
         self.tokyo247_path = os.path.join(self.datasets_folder, "tokyo247")
-        self.pitts30k_n_path = os.path.join(self.datasets_folder, "pitts30k_n")
+        self.pitts30k_n_path = os.path.join(self.datasets_folder, "pitts30k")
 
         os.makedirs(self.raw_pittsburgh_dataset_path, exist_ok=True)
         os.makedirs(self.raw_tokyo_dataset_path, exist_ok=True)
@@ -124,6 +124,9 @@ class Format_Datasets():
             elif index%3 == 2:
                 shutil.copy(image_path, os.path.join(self.trainB_path, image_name))
 
+    def build_nightcity(self):
+        shutil.unpack_archive(os.path.join(self.raw_dataset_path, "nightcity.zip"), self.datasets_folder)
+
 
     def build_sf_xl_small(self):
         shutil.unpack_archive(os.path.join(self.raw_dataset_path, "small.zip"), self.datasets_folder)
@@ -170,9 +173,10 @@ class Format_Datasets():
 
 if __name__ == "__main__":
     formater = Format_Datasets("./datasets")
+    # formater.build_nightcity()
     # formater.tokyo247_to_nightstreet()
     # formater.aachenDN_to_nightstreet()
-    # formater.build_sf_xl_small()
+    formater.build_sf_xl_small()
     # formater.build_pitts30k()
 
 
