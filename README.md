@@ -1,6 +1,6 @@
-# NPR: Night Place Recognition via Night-City Translation and Transfer Learning
+# NPR: Night Place Recognition via Contrastive Domain Adaption
 
-This is the official implementation of the paper "NPR: Night Place Recognition via Night-City Translation and Transfer Learning".
+This is the official implementation of the paper "NPR: Night Place Recognition via Contrastive Domain Adaption".
 
 ```shell
 git clone https://github.com/BinuxLiu/npr.git
@@ -8,7 +8,12 @@ git submodule init
 git submodule update
 ```
 
+**Update**: Due to the possible data leakage of NightStreet raised by some reviewers, we created a new dataset, **NightCity**, which can get better results.
+
+
 ## Reproduce our results
+
+If you want to reproduce our experiment from start to finish, please perform each step below. (It takes a long time to train the night generation model and generate night data.) If you want to train the VPR model on the night data we generated, skip to step 4 after performing step 1. If you just want to test our model on a public dataset, skip to step 5 after step 1.
 
 1. Generate and unzip the NightStreet, NightCity and VPR datasets.
     * First, run the following command:
@@ -16,17 +21,18 @@ git submodule update
         # Initialize the folders of datasets
         python format_datasets.py --datasets_folder /path/to/datasets
         ```
-    * Then, you need to download AachenDN (v1, v1.1), Tokyo247 (v2, v3, and database), Pittsburgh, SF-XL-small dataset to the **datasets/raw** folder.
+    * Then, you need to download AachenDN (v1, v1.1), Tokyo247 (v2, v3, and database), Pittsburgh, SF-XL-small dataset to the **/path/to/datasets/raw** folder.
       The download links of above datasets are written in the comments of `format_datasets.py`.
-      In **datasets/raw/pittsburgh** there should be the following folders: 000, 001, 002, 003, 004, 005, 006, queries_real, index. (index is a folder that contains files such as pitts30k_train.mat).
+      In **/path/to/datasets/raw/pittsburgh** there should be the following folders: 000, 001, 002, 003, 004, 005, 006, queries_real, index. (index is a folder that contains files such as pitts30k_train.mat).
       Except for the Pittsburgh and Tokyo 247 dataset, none of the other datasets require you to manually decompress them.
-    * Run the following command:
+    * Run the following command again:
         ```shell
         python format_datasets.py --datasets_folder /path/to/datasets/ --datasets aachen_tokyo_pitts_sfxl
         ```
-    * If you are using our pre-generated NightStreet dataset, you can skip the above step. You can download the NightStreet dataset directly from here and merge it with the `./datasets/nightstreet` folder after extracting it.
+    * If you are using our pre-generated nightstreet dataset, you can skip the above step. You can download the NightStreet dataset directly from here and merge it with the `./datasets/nightstreet` folder after extracting it.
 
-2. Train NEG-CUT on NightCity dataset (NightCity)
+
+2. Train NEG-CUT on NightCity(NightStreet) dataset 
     * To train NEG-CUT on the NightCity dataset, run the following command in the terminal:
         ```shell
         # terminal_1
@@ -40,7 +46,7 @@ git submodule update
         # NightCity
         python train.py --dataroot ../../datasets/nightcity --checkpoints_dir ../../checkpoints --name nightcity --NEGCUT_mode negcut --model negcut --load_size 512 --crop_size 512 --preprocess scale_shortside_and_crop
         ```
-    * If you are using our pre-trained NEG-CUT model or pre-generated VPR-Night datasets, you can **skip this step**.
+    * If you are using our pre-trained night generator or pre-generated VPR-Night datasets, you can **skip this step**.
 
 3. Generate VPR-Night datasets by processing VPR datasets
     * To generate the VPR-Night dataset by processing the VPR dataset, run the following command in the terminal:
@@ -51,9 +57,9 @@ git submodule update
     * If you are using our pre-generated VPR-Night dataset, you can **skip this step**.
 
 4. Train or fine-tuning VPR methods on VPR-Night datasets
-    * Training CosPlace on sf_xl_small_N:
+    * Training CosPlace on sf_xl_small_n:
         ```shell
-        python train.py
+        python train.py --dataset_folder ../../datasets/sf_xl_small/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth --groups_num 1 --fc_output_dim 512 --brightness=0 --contrast=0 --hue=0 --saturation=0
         ```
     * Training DVG on pitts30k_N:
         ```shell
@@ -61,6 +67,10 @@ git submodule update
         ```
 
 5. Eval NPR on the Tokyo247 and AachenDN datasets
+
+    ```
+    python eval.py --dataset_folder ../../datasets/tokyo247/images/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth 
+    ```
 
 ## Issues
 
