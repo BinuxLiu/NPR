@@ -66,14 +66,21 @@ class Format_Datasets():
         self.testA_path = os.path.join(self.nightstreet_path, "testA")
         self.testB_path = os.path.join(self.nightstreet_path, "testB")
 
-        self.tokyo247_path = os.path.join(self.datasets_folder, "tokyo247")
-        self.pitts30k_path = os.path.join(self.datasets_folder, "pitts30k")
+        self.tokyo247_path = os.path.join(self.datasets_folder, "tokyo247") # test for night
+        self.pitts30k_path = os.path.join(self.datasets_folder, "pitts30k") # train / test for day
+        self.sf_xl_path = os.path.join(self.datasets_folder, "sf_xl")       # train / test for night    
+        self.aachen_DN = os.path.join(self.datasets_folder, "aachen_DN")    # test for night
+        self.oxford_DN = os.path.join(self.datasets_folder, "oxford_DN") # test for night
+        self.qtu_DN = None
+        self.zju_DN = None
 
         os.makedirs(self.raw_pittsburgh_dataset_path, exist_ok=True)
         os.makedirs(self.raw_tokyo_dataset_path, exist_ok=True)
 
         os.makedirs(self.tokyo247_path, exist_ok=True)
-        os.makedirs(self.pitts30k_path, exist_ok=True) 
+        os.makedirs(self.pitts30k_path, exist_ok=True)
+        os.makedirs(self.sf_xl_path, exist_ok=True)
+        os.makedirs(self.aachen_DN_path, exist_ok=True)
 
         os.makedirs(self.trainA_path, exist_ok=True)
         os.makedirs(self.trainB_path, exist_ok=True)
@@ -131,8 +138,7 @@ class Format_Datasets():
 
 
     def build_sf_xl_small(self):
-        shutil.unpack_archive(os.path.join(self.raw_dataset_path, "small.zip"), self.datasets_folder)
-        os.rename(os.path.join(self.datasets_folder, 'small'), os.path.join(self.datasets_folder, "sf_xl_small"))
+        shutil.unpack_archive(os.path.join(self.raw_dataset_path, "small.zip"), self.sf_xl_path)
 
 
     def copy_pitts_images(self, target_folder, images_paths, utms):
@@ -216,9 +222,20 @@ class Format_Datasets():
 
 
 
-    def build_aachenDN(self):
+    def build_aachen_DN(self):
         pass
 
+
+    def build_zju_DN(self):
+        pass
+
+
+    def build_qtu_DN(self):
+        pass
+
+
+    def build_oxford_DN(self):
+        pass
 
 if __name__ == "__main__":
     formater = Format_Datasets("./datasets")
@@ -228,5 +245,8 @@ if __name__ == "__main__":
     # formater.build_sf_xl_small()
     # formater.build_pitts30k()
     formater.build_tokyo247()
+    # formater.build_aachen_DN()
+    # formater.build_qtu_DN()
+    # formater.build_oxford_DN()
 
 
