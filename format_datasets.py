@@ -69,10 +69,10 @@ class Format_Datasets():
         self.tokyo247_path = os.path.join(self.datasets_folder, "tokyo247") # test for night
         self.pitts30k_path = os.path.join(self.datasets_folder, "pitts30k") # train / test for day
         self.sf_xl_path = os.path.join(self.datasets_folder, "sf_xl")       # train / test for night    
-        self.aachen_DN = os.path.join(self.datasets_folder, "aachen_DN")    # test for night
-        self.oxford_DN = os.path.join(self.datasets_folder, "oxford_DN") # test for night
-        self.qtu_DN = None
-        self.zju_DN = None
+        self.aachen_DN_path = os.path.join(self.datasets_folder, "aachen_DN")    # test for night
+        self.oxford_DN_path = os.path.join(self.datasets_folder, "oxford_DN") # test for night
+        self.qtu_DN_path = None
+        self.zju_DN_path = None
 
         os.makedirs(self.raw_pittsburgh_dataset_path, exist_ok=True)
         os.makedirs(self.raw_tokyo_dataset_path, exist_ok=True)
@@ -80,7 +80,7 @@ class Format_Datasets():
         os.makedirs(self.tokyo247_path, exist_ok=True)
         os.makedirs(self.pitts30k_path, exist_ok=True)
         os.makedirs(self.sf_xl_path, exist_ok=True)
-        os.makedirs(self.aachen_DN_path, exist_ok=True)
+        # os.makedirs(self.aachen_DN_path, exist_ok=True)
 
         os.makedirs(self.trainA_path, exist_ok=True)
         os.makedirs(self.trainB_path, exist_ok=True)
@@ -242,9 +242,9 @@ if __name__ == "__main__":
     # formater.build_nightcity()
     # formater.tokyo247_to_nightstreet()
     # formater.aachenDN_to_nightstreet()
-    # formater.build_sf_xl_small()
+    formater.build_sf_xl_small()
     # formater.build_pitts30k()
-    formater.build_tokyo247()
+    # formater.build_tokyo247()
     # formater.build_aachen_DN()
     # formater.build_qtu_DN()
     # formater.build_oxford_DN()

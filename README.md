@@ -52,14 +52,14 @@ If you want to reproduce our experiment from start to finish, please perform eac
     * To generate the VPR-Night dataset by processing the VPR dataset, run the following command in the terminal:
 
         ```shell
-        python test.py --dataroot ../../datasets/sf_xl_small/train --name nightcity --NEGCUT_mode negcut --model negcut --checkpoints_dir ../../checkpoints --load_size 512 --preprocess none --dataset_mode vpr
+        python test.py --dataroot ../../datasets/sf_xl/small/train --name nightcity --NEGCUT_mode negcut --model negcut --checkpoints_dir ../../checkpoints --load_size 512 --preprocess none --dataset_mode vpr
         ```
     * If you are using our pre-generated VPR-Night dataset, you can **skip this step**.
 
 4. Train or fine-tuning VPR methods on VPR-Night datasets
     * Training CosPlace on sf_xl_small_n:
         ```shell
-        python train.py --dataset_folder ../../datasets/sf_xl_small/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth --groups_num 1 --fc_output_dim 512 --brightness=0 --contrast=0 --hue=0 --saturation=0
+        python train.py --dataset_folder ../../datasets/sf_xl/small/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth --groups_num 1 --fc_output_dim 512 --brightness=0 --contrast=0 --hue=0 --saturation=0
         ```
     * Training DVG on pitts30k_N:
         ```shell
