@@ -1,6 +1,6 @@
-# NPR: Night Place Recognition via Contrastive Domain Adaption
+<!-- # NLPR: NocturnaL Place Recognition via Contrastive Domain Adaption -->
 
-This is the official implementation of the paper "NPR: Night Place Recognition via Contrastive Domain Adaption".
+This is the official implementation of the paper "NPR: Nocturnal Place Recognition".
 
 ```shell
 git clone https://github.com/BinuxLiu/npr.git
@@ -8,12 +8,12 @@ git submodule init
 git submodule update
 ```
 
-**Update**: Due to the possible data leakage of NightStreet raised by some reviewers, we created a new dataset, **NightCity**, which can get better results.
-
 
 ## Reproduce our results
 
-If you want to reproduce our experiment from start to finish, please perform each step below. (It takes a long time to train the night generation model and generate night data.) If you want to train the VPR model on the night data we generated, skip to step 4 after performing step 1. If you just want to test our model on a public dataset, skip to step 5 after step 1.
+If you want to reproduce our experiment from start to finish, please perform each step below. (It takes a long time to train the night generation model and generate night data.) 
+If you want to train the VPR model on the night data we generated, skip to step 4 after performing step 1. 
+If you just want to test our model on a public dataset, skip to step 5 after step 1.
 
 1. Generate and unzip the NightStreet, NightCity and VPR datasets.
     * First, run the following command:
@@ -40,6 +40,7 @@ If you want to reproduce our experiment from start to finish, please perform eac
         ```
         ```shell
         # terminal_2
+        python train.py --dataroot ./datasets/nightstreet --name maps_cyclegan --model cycle_gan --load_size 512 --crop_size 512 --preprocess scale_shortside_and_crop
         cd ./third_party/NEGCUT
         # NightStreet
         python train.py --dataroot ../../datasets/nightstreet --checkpoints_dir ../../checkpoints --name nightstreet --NEGCUT_mode negcut --model negcut --load_size 512 --crop_size 512 --preprocess scale_shortside_and_crop
@@ -56,10 +57,15 @@ If you want to reproduce our experiment from start to finish, please perform eac
         ```
     * If you are using our pre-generated VPR-Night dataset, you can **skip this step**.
 
+    Generate the features of VPR datasets for supervising the NPR model
+    ```
+    python eval.py --dataset_folder ../../datasets/sf_xl/small --backbone ResNet50 --fc_output_dim 2048 --resume_model ./logs/official/ResNet50_2048_cosplace.pth --use_kd --infer_batch_size 1
+    ```
+
 4. Train or fine-tuning VPR methods on VPR-Night datasets
     * Training CosPlace on sf_xl_small_n:
         ```shell
-        python train.py --dataset_folder ../../datasets/sf_xl/small/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth --groups_num 1 --fc_output_dim 512 --brightness=0 --contrast=0 --hue=0 --saturation=0
+        python train.py --dataset_folder ../../datasets/sf_xl/small/ --backbone ResNet50 --fc_output_dim 2048 --resume_model ./logs/official/ResNet50_2048_eigenplaces.pth --groups_num 1 --fc_output_dim 512 --brightness=0 --contrast=0 --hue=0 --saturation=0 --use_kd
         ```
     * Training DVG on pitts30k_N:
         ```shell
@@ -70,11 +76,12 @@ If you want to reproduce our experiment from start to finish, please perform eac
 
     ```
     python eval.py --dataset_folder ../../datasets/tokyo247/images/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth 
+    python eval.py --dataset_folder ../../datasets/sf_xl/small/ --backbone ResNet50 --fc_output_dim 512 --resume_model ./logs/official/resnet50_512.pth 
     ```
 
 ## Issues
 
-If you have any questions regarding our code or datasets, feel free to open an issue or send an e-mail to binuxliu@gmail.com
+If you have any questions regarding our code or datasets, feel free to open an issue or send an e-mail to liubx@pcl.ac.cn or binuxliu@gmail.com
 
 ## Cite
 
