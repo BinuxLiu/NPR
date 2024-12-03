@@ -1,6 +1,4 @@
-<!-- # NLPR: NocturnaL Place Recognition via Contrastive Domain Adaption -->
-
-This is the official implementation of the paper "NPR: Nocturnal Place Recognition".
+This is the official implementation of the paper "NPR: Nocturnal Place Recognition Using Nighttime Translation in Large-Scale Training Procedures".
 
 ```shell
 git clone https://github.com/BinuxLiu/npr.git
@@ -11,7 +9,8 @@ git submodule update
 
 ## Reproduce our results
 
-If you want to reproduce our experiment from start to finish, please perform each step below. (It takes a long time to train the night generation model and generate night data.) 
+If you want to reproduce our experiment from start to finish, please perform each step below. 
+(It takes a long time to train the night generation model and generate night data.) 
 If you want to train the VPR model on the night data we generated, skip to step 4 after performing step 1. 
 If you just want to test our model on a public dataset, skip to step 5 after step 1.
 
@@ -85,6 +84,15 @@ If you have any questions regarding our code or datasets, feel free to open an i
 
 ## Cite
 
+```
+@article{liu2024npr,
+  title={NPR: Nocturnal Place Recognition Using Nighttime Translation in Large-Scale Training Procedures},
+  author={Liu, Bingxi and Fu, Yujie and Lu, Feng and Cui, Jinqiang and Wu, Yihong and Zhang, Hong},
+  journal={IEEE Journal of Selected Topics in Signal Processing},
+  year={2024},
+  publisher={IEEE}
+}
+```
 
 
 
